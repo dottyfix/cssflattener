@@ -1,0 +1,144 @@
+/*
+ * Ce fichier de test explore les différentes syntaxes des at-rules CSS.
+ * Il est conçu pour valider un parser en couvrant les cas les plus courants
+ * des at-rules de type "inline", "block" et les plus complexes.
+ */
+
+
+/* =========================================== */
+/* 1. At-Rules Inline (se terminant par ';')  */
+/* =========================================== */
+
+/* @charset */
+/* Doit toujours être en début de fichier */
+@charset "UTF-8";
+
+/* @import */
+/* Syntaxe avec url() */
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+/* Syntaxe avec url() et media query */
+@import url("print.css") print;
+/* Syntaxe avec une chaîne de caractères et un commentaire en fin de ligne */
+@import "main.css"; /* C'est un test pour le parser */
+/* Syntaxe avec plusieurs media queries */
+@import url("mobile.css") screen and (max-width: 600px), projection;
+
+/* @namespace */
+/* Simple */
+@namespace svg url("http://www.w3.org/2000/svg");
+/* Avec identifiant */
+@namespace "http://www.w3.org/1999/xhtml";
+
+
+/* ========================================================== */
+/* 2. At-Rules de type bloc (contenant d'autres règles ou déclarations) */
+/* ========================================================== */
+
+/* @media */
+/* Media query simple */
+@media screen and (min-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+}
+/* Media query complexe avec plusieurs conditions */
+@media (min-width: 768px) and (orientation: landscape) {
+  nav {
+    display: flex;
+  }
+}
+/* Media query imbriquée (pour tester le parser) */
+@media screen {
+  @media (min-width: 900px) {
+    #sidebar {
+      width: 300px;
+    }
+  }
+}
+
+/* @supports */
+/* Test de support simple */
+@supports (display: grid) {
+  .grid-container {
+    display: grid;
+  }
+}
+/* Test de support complexe */
+@supports (not (display: flex)) or (display: grid) {
+  .legacy-flex-fallback {
+    display: block;
+  }
+}
+
+/* @container */
+/* Container query simple */
+@container (min-width: 500px) {
+  .card {
+    flex-direction: row;
+  }
+}
+
+/* @keyframes */
+/* Doit contenir d'autres blocs */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* Syntaxe avec 'from' et 'to' */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+
+/* @font-face */
+/* Doit contenir uniquement des déclarations */
+@font-face {
+  font-family: "MyHelvetica";
+  src: local("Helvetica Neue Bold"),
+       local("HelveticaNeue-Bold"),
+       url(MgOpenModernaBold.ttf);
+  font-weight: bold;
+}
+
+/* @page */
+/* Doit contenir uniquement des déclarations */
+@page {
+  margin: 1cm;
+}
+@page :left {
+  margin-left: 2cm;
+}
+
+/* @layer */
+/* Déclaration de calques */
+@layer theme, components, utilities;
+/* Déclaration de calque avec un bloc */
+@layer components {
+  .btn {
+    border-radius: 5px;
+  }
+  @layer secondary {
+    .btn-secondary {
+      background-color: gray;
+    }
+  }
+}
+
+/* @counter-style */
+@counter-style thumbs {
+  system: cyclic;
+  symbols: "\1F44D";
+  suffix: " ";
+}

@@ -3,7 +3,7 @@
   "description": "Un parseur CSS avec flattening du nesting et des media queries.",
   "autoload": {
     "psr-4": {
-      "Dottyfix\\Tools\\CSSFlattener\\": "src/"
+      "Dottyfix\\CSSFlattener\\": "src/"
     }
   },
   "require-dev": {

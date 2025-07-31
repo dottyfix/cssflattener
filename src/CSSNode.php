@@ -1,5 +1,5 @@
 <?php
-namespace Nocto\Tools\CSSFlattener;
+namespace Dottyfix\CSSFlattener;
 
 abstract class CSSNode {
     public $parent = null;

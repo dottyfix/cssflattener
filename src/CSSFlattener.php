@@ -1,5 +1,5 @@
 <?php
-namespace Nocto\Tools\CSSFlattener;
+namespace Dottyfix\CSSFlattener;
 
 class CSSFlattener {
     public function flatten(array $nodes, string $parentSelector = ''): array {

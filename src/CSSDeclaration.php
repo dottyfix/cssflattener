@@ -1,5 +1,5 @@
 <?php
-namespace Nocto\Tools\CSSFlattener;
+namespace Dottyfix\CSSFlattener;
 
 class CSSDeclaration extends CSSNode {
     public $property;
